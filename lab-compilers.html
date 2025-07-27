@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Compiler Simulation UI</title>
+  <style>
+    body {
+      background: #1e1e1e;
+      color: #f1f1f1;
+      font-family: 'Courier New', monospace;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ✅ Neon Header */
+    .game-header {
+      width: 100%;
+      background: #00cc77;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      box-shadow: 0 4px 12px rgba(0, 255, 100, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .game-header .left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-logo {
+      height: 38px;
+    }
+
+    .game-header h2 {
+      margin: 0;
+      color: #111;
+      font-size: 1.5rem;
+    }
+
+    .game-header .right {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .dashboard-link {
+      text-decoration: none;
+      font-weight: 500;
+      color: #111;
+    }
+
+    .logout-btn {
+      background: #ff4d4d;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+
+    .logout-btn:hover {
+      background: #cc0000;
+    }
+
+    /* ✅ Compiler UI */
+    .container {
+      max-width: 1000px;
+      margin: 3rem auto;
+      background: #2a2a2a;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 255, 100, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #00ff99;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    select, textarea, button {
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+    }
+
+    select {
+      background: #333;
+      color: #fff;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: none;
+      border-radius: 6px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 200px;
+      background: #111;
+      color: #00ff99;
+      padding: 1rem;
+      border: none;
+      border-radius: 6px;
+      resize: vertical;
+    }
+
+    button {
+      background: #00ff99;
+      color: #111;
+      padding: 0.75rem 2rem;
+      margin-top: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #00cc77;
+    }
+
+    .terminal {
+      margin-top: 2rem;
+      background: #000;
+      color: #0f0;
+      padding: 1rem;
+      height: 200px;
+      overflow-y: auto;
+      border-radius: 6px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ✅ Neon Header -->
+  <header class="game-header">
+    <div class="left">
+      <img src="logo.png" alt="STEM Tool Logo" class="nav-logo">
+      <h2>Lab</h2>
+    </div>
+    <div class="right">
+      <a href="colhome.html" class="dashboard-link">Dashboard</a>
+      <a href="login.html" class="logout-btn">Logout</a>
+      <img src="icon.svg" alt="Profile" class="profile-icon" style="height: 32px;">
+    </div>
+  </header>
+
+  <!-- ✅ Compiler Simulation UI -->
+  <div class="container">
+    <h1>🔧 Compiler Simulation</h1>
+
+    <label for="language">Choose Language:</label>
+    <select id="language">
+      <option value="c">C</option>
+      <option value="cpp">C++</option>
+      <option value="java">Java</option>
+      <option value="python">Python</option>
+    </select>
+
+    <textarea id="code" placeholder="// Write your code here..."></textarea>
+    <button onclick="simulateCompilation()">Compile & Run</button>
+
+    <div class="terminal" id="terminal">
+      // Compilation log will appear here...
+    </div>
+  </div>
+
+  <script>
+    function simulateCompilation() {
+      const code = document.getElementById("code").value;
+      const lang = document.getElementById("language").value;
+      const terminal = document.getElementById("terminal");
+
+      terminal.innerText = `Compiling ${lang.toUpperCase()} code...\n`;
+
+      setTimeout(() => {
+        if (!code.trim()) {
+          terminal.innerText += "Error: No code to compile!\nCompilation failed.\n";
+          return;
+        }
+
+        terminal.innerText += "Checking syntax...\n";
+
+        setTimeout(() => {
+          terminal.innerText += "Compilation successful!\n";
+
+          setTimeout(() => {
+            terminal.innerText += "Running program...\n";
+
+            setTimeout(() => {
+              let output = "Program Output:\n";
+
+              if (code.includes("Hello")) {
+                output += "Hello, World!";
+              } else if (code.includes("print") || code.includes("System.out") || code.includes("printf")) {
+                output += "User-defined output detected.";
+              } else {
+                output += "[No output simulated]";
+              }
+
+              terminal.innerText += output;
+            }, 1000);
+
+          }, 1000);
+
+        }, 1000);
+
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
