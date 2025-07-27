@@ -88,7 +88,7 @@ The **EduPulse** is a professional, feature-rich web application that simulates 
 
    (or)
 
-open the following link on your browser : https://aruthra615.github.io/Web-Project#
+open the following link on your browser : https://advaith3953.github.io/Web-Project/
 
 ---
 
